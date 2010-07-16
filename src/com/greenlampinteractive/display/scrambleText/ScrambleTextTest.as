@@ -22,6 +22,8 @@ package com.greenlampinteractive.display.scrambleText
 		private var _bodyTextTwo:ScrambleTextDisplay;
 		private var _bodyTextThree:ScrambleTextDisplay;
 		
+		private var _directionsText:ScrambleTextDisplay;
+		
 		//in order to have it all follow the mouse when it moves, i throw each instance in a contianer sprite and move that. 
 		private var _textContainer:Sprite;
 		
@@ -41,7 +43,7 @@ package com.greenlampinteractive.display.scrambleText
 			
 			_btn = new Sprite();
 			_btn.graphics.beginFill(0x009999);
-			_btn.graphics.drawRect(0,0,55,55);
+			_btn.graphics.drawRect(0,0,55,260);
 			_btn.graphics.endFill();
 			this.addChild(_btn);
 			_btn.buttonMode = true;
@@ -50,7 +52,21 @@ package com.greenlampinteractive.display.scrambleText
 			
 			_textContainer = new Sprite();
 			this.addChild(_textContainer);
-	
+			
+			var helvetica:HelveticaNeue = new HelveticaNeue();
+			
+			var textFormat:TextFormat = new TextFormat();
+			textFormat.color = 0xffffff;
+			textFormat.size = 10;
+			textFormat.font = helvetica.fontName;
+			
+			_directionsText = new ScrambleTextDisplay();
+			_directionsText.setBGShapeParams(0x777777, .8, 5);
+			_directionsText.setTextFormat(textFormat);
+			this.addChild(_directionsText);
+			_directionsText.setText("HOVER OVER THE BLUISH GREEN STRIP.", 500);
+			_directionsText.y = 10;
+			_directionsText.x = 260;
 		}		
 		
 		private function runTextField(evt:MouseEvent):void
@@ -62,13 +78,13 @@ package com.greenlampinteractive.display.scrambleText
 			
 			var textFormat:TextFormat = new TextFormat();
 			textFormat.color = 0x333333;
-			textFormat.size = 14;
+			textFormat.size = 10;
 			textFormat.font = helvetica.fontName;
 			
 			var headingTextFormat:TextFormat = new TextFormat();
 			headingTextFormat.color = 0xf1f1f1;
 			headingTextFormat.font = helvetica.fontName;
-			headingTextFormat.size = 18;
+			headingTextFormat.size = 16;
 			
 			_headingTextField = new ScrambleTextDisplay();
 			_headingTextField.setBGShapeParams(0x777777, .8, 5);
@@ -95,8 +111,10 @@ package com.greenlampinteractive.display.scrambleText
 			_bodyTextTwo.setBGShapeParams(0xf3f939, .8, 5);
 			_bodyTextTwo.setTextFormat(textFormat);
 			_textContainer.addChild(_bodyTextTwo);
-			_bodyTextTwo.setText("DOWNLOAD THE SOURCE AND TAKE IT FOR A SPIN.", 1500);
+			_bodyTextTwo.setText("FORK THE SOURCE AND TAKE IT FOR A SPIN.", 1500);
 			_bodyTextTwo.y = _bodyTextThree.y + _bodyTextThree.getHeight();
+			
+			
 			
 			this.addEventListener(MouseEvent.MOUSE_MOVE, onMouseMoveHandler);
 			
